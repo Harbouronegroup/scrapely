@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.pureviewexteriors.co.uk/sitemap.xml
