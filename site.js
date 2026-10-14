@@ -138,37 +138,29 @@
     }
   });
 
-  /* Quote form */
+  /* Quote form: posts to FormSubmit, which emails the request and returns to the site */
   $("form.quote").forEach(function (form) {
     var msg = form.querySelector(".form-msg");
     var btn = form.querySelector("button[type=submit]");
     var files = form.querySelector("input[type=file]");
     var fileHint = form.querySelector("[data-files]");
+    var next = form.querySelector("input[name=_next]");
+    if (next && /^https?:/.test(location.protocol)) next.value = location.origin + location.pathname + "?sent=1#quote";
+    function show(text, bad) { msg.hidden = false; msg.textContent = text; msg.classList.toggle("err", !!bad); }
     if (files && fileHint) {
       files.addEventListener("change", function () {
-        var n = files.files.length;
-        fileHint.textContent = n ? n + (n === 1 ? " photo selected" : " photos selected") : "Up to 5 photos, 8MB each.";
+        var f = files.files[0];
+        fileHint.textContent = f ? (f.size > 5 * 1024 * 1024 ? "That photo is over 5MB. Please choose a smaller one." : "1 photo selected") : "One photo, up to 5MB.";
       });
     }
-    function show(text, bad) { msg.hidden = false; msg.textContent = text; msg.classList.toggle("err", !!bad); msg.focus(); }
+    if (/[?&]sent=1/.test(location.search)) {
+      show("Thank you. Your quote request has been sent and we will be in touch shortly.");
+      try { form.scrollIntoView({ block: "center" }); } catch (e) {}
+    }
     form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (!form.reportValidity()) return;
-      if (files && files.files.length > 5) { show("Please choose 5 photos or fewer.", true); return; }
-      var label = btn.textContent;
+      if (!form.reportValidity()) { e.preventDefault(); return; }
+      if (files && files.files[0] && files.files[0].size > 5 * 1024 * 1024) { e.preventDefault(); show("Please choose a photo under 5MB.", true); return; }
       btn.disabled = true; btn.textContent = "Sending your request";
-      fetch(form.getAttribute("data-endpoint"), { method: "POST", body: new FormData(form), headers: { "Accept": "application/json" } })
-        .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
-        .then(function (j) {
-          if (!j || !j.ok) return Promise.reject();
-          form.reset();
-          if (fileHint) fileHint.textContent = "Up to 5 photos, 8MB each.";
-          show("Thank you. Your quote request has been sent and we will be in touch shortly.");
-        })
-        .catch(function () {
-          show("Sorry, your request could not be sent from this page. Please call or text 07743 972243, or email Pureview.exteriors@outlook.com, and we will get straight back to you.", true);
-        })
-        .then(function () { btn.disabled = false; btn.textContent = label; });
     });
   });
 })();
