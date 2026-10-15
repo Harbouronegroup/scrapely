@@ -1,0 +1,18 @@
+Options -Indexes
+DirectoryIndex gate.php
+
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Login, logout and the gate itself are reachable directly
+RewriteRule ^(login\.php|logout\.php|gate\.php)$ - [L]
+
+# Everything else goes through the login check
+RewriteRule ^(.*)$ gate.php?f=$1 [L,QSA]
+
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
