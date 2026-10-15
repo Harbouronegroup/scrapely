@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Smoke & Taco</title>
+<meta name="description" content="Smoke & Taco: tacos and smoked street food. Find us at an upcoming event or book us for yours.">
+<meta property="og:title" content="Smoke & Taco">
+<meta property="og:description" content="Tacos and smoked street food. Find us at an event or book us for yours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Zilla+Slab:wght@600;700&family=Figtree:wght@400;500;700&display=swap">
+<style>
+/* Layout: a frame of square illustrated tiles (fixed rails on desktop, strips between sections) around one wide centre column. Single brand look, light only. */
+:root{
+  --orange:#F58A22; --burg:#81210B; --burg-deep:#5E1707; --pink:#E59EBE; --mint:#95CAB8; --yellow:#F5F4BE; --paper:#FFFBF0;
+  --display:"Bowlby One","Arial Black",Impact,sans-serif;
+  --slab:"Zilla Slab",Rockwell,Georgia,serif;
+  --body:"Figtree","Helvetica Neue",Arial,sans-serif;
+  --t:clamp(64px,6.4vw,104px); --ts:clamp(44px,9vw,76px); --gut:clamp(16px,4vw,56px);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--burg);font:400 17px/1.55 var(--body);overflow-x:hidden}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:.98;margin:0;text-wrap:balance;text-transform:uppercase;letter-spacing:.005em}
+h1{font-size:clamp(2.6rem,7.2vw,6.2rem)}
+h2{font-size:clamp(2rem,4.6vw,3.9rem)}
+h3{font-family:var(--slab);font-weight:700;font-size:1.45rem;line-height:1.1;text-transform:none}
+p{margin:0;max-width:62ch}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--burg-deep);outline-offset:3px;border-radius:2px}
+.on-dark :focus-visible{outline-color:var(--yellow)}
+.eyebrow{font:700 .8rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;gap:.6rem}
+.eyebrow::before{content:"";width:46px;height:12px;background:currentColor;-webkit-mask:var(--wave) center/contain no-repeat;mask:var(--wave) center/contain no-repeat}
+:root{--wave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46 12'%3E%3Cpath d='M2 8c4-8 8-8 12 0s8 8 12 0 8-8 12 0 4 3 6 0' fill='none' stroke='%23000' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E")}
+
+/* tiles */
+.tile{width:var(--t);height:var(--t);flex:none;display:grid;place-items:center;background:var(--bg);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.tile svg,.tile .flm,.tile img{width:58%;height:58%}
+.tile img{object-fit:contain;width:78%}
+.tile:hover{transform:rotate(-5deg) scale(1.06);z-index:2}
+.flm{background:var(--a);-webkit-mask:url(flame.png) center/contain no-repeat;mask:url(flame.png) center/contain no-repeat;transform-origin:50% 90%}
+.rail{position:fixed;top:0;bottom:0;width:var(--t);overflow:hidden;z-index:5;background:var(--paper)}
+.rail.l{left:0}.rail.r{right:0}
+.rail>div{display:flex;flex-direction:column;will-change:transform}
+.strip{display:flex;justify-content:center;overflow:hidden;--t:var(--ts)}
+.shell{margin-inline:var(--t);min-width:0}
+@media (max-width:899px){.rail{display:none}.shell{margin-inline:0}}
+.live .flm{animation:flick 1.6s ease-in-out infinite}
+.live .palm{animation:sway 4.5s ease-in-out infinite;transform-origin:50% 86%;transform-box:view-box}
+.live .star{animation:twinkle 3s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+.live .steam{animation:steam 2.8s linear infinite}
+.live .lines{animation:lines 3.4s ease-in-out infinite}
+@keyframes flick{0%,100%{transform:scale(1) skewX(0)}30%{transform:scale(1.05,1.09) skewX(-3deg)}60%{transform:scale(.97,1.03) skewX(3deg)}}
+@keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(4deg)}}
+@keyframes twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(.78) rotate(18deg)}}
+@keyframes steam{0%{transform:translateY(5px);opacity:0}30%{opacity:1}100%{transform:translateY(-9px);opacity:0}}
+@keyframes lines{0%,100%{transform:translateY(0)}50%{transform:translateY(2.5px)}}
+
+/* header */
+.head{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--orange);display:flex;align-items:center;gap:1rem;padding:.55rem var(--gut);border-bottom:4px solid var(--burg);transition:padding .25s}
+.head.small{padding-block:.25rem}
+.head .brand img{display:block;height:clamp(46px,6vw,66px);width:auto;transition:height .25s}
+.head.small .brand img{height:42px}
+.nav{display:flex;gap:clamp(.6rem,1.6vw,1.6rem);margin-left:auto;align-items:center}
+.nav a{font:700 .86rem/1 var(--body);letter-spacing:.09em;text-transform:uppercase;text-decoration:none;padding:.55rem .1rem;border-bottom:3px solid transparent;transition:border-color .2s}
+.nav a:hover,.nav a[aria-current="page"]{border-color:var(--burg)}
+.btn{display:inline-flex;align-items:center;gap:.55rem;font:700 .9rem/1 var(--body);letter-spacing:.09em;text-transform:uppercase;text-decoration:none;padding:1rem 1.35rem;background:var(--burg);color:var(--yellow);border:3px solid var(--burg);cursor:pointer;box-shadow:5px 5px 0 var(--sh,var(--pink));transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--sh,var(--pink))}
+.btn.alt{background:var(--yellow);color:var(--burg);--sh:var(--burg)}
+.btn.sm{padding:.75rem 1rem;font-size:.78rem;box-shadow:4px 4px 0 var(--yellow)}
+.menu{display:none;margin-left:auto;background:var(--burg);color:var(--yellow);border:0;font:700 .8rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;padding:.8rem .9rem;cursor:pointer}
+@media (max-width:1100px){
+  .menu{display:block}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--orange);flex-direction:column;align-items:stretch;gap:0;padding:.5rem var(--gut) 1.2rem;border-bottom:4px solid var(--burg)}
+  .nav.open{display:flex}
+  .nav a{padding:.95rem 0;border-bottom:2px solid rgba(129,33,11,.25)}
+  .nav .btn{margin-top:1rem;justify-content:center;border-bottom:3px solid var(--burg)}
+}
+
+/* sections */
+.view{display:none}.view.on{display:block}
+.sec{padding:clamp(3rem,7vw,6rem) var(--gut);display:grid;gap:clamp(1.5rem,3vw,2.5rem)}
+.stack{display:grid;gap:1.1rem;align-content:start;min-width:0}
+.row{display:flex;flex-wrap:wrap;gap:1rem 1.2rem;align-items:center}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(1.5rem,4vw,4rem);align-items:center}
+.bg-orange{background:var(--orange)}.bg-mint{background:var(--mint)}.bg-pink{background:var(--pink)}.bg-yellow{background:var(--yellow)}
+.bg-burg{background:var(--burg);color:var(--yellow)}
+.bg-burg .btn{background:var(--yellow);color:var(--burg);border-color:var(--yellow);--sh:var(--orange)}
+.lead{font-size:clamp(1.05rem,1.5vw,1.3rem);font-weight:500}
+.note{font-size:.88rem;border:2px dashed currentColor;padding:.8rem 1rem;max-width:62ch}
+
+/* hero */
+.hero{background:var(--orange);position:relative;overflow:hidden;padding:clamp(2rem,5vw,4.5rem) var(--gut) clamp(3rem,6vw,5rem);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:2rem;align-items:center}
+.hero h1 span{display:block;animation:rise .7s cubic-bezier(.2,.9,.3,1.2) both}
+.hero h1 span+span{animation-delay:.12s;color:var(--yellow);-webkit-text-stroke:0}
+@keyframes rise{from{transform:translateY(40px) rotate(2deg)}to{transform:none}}
+.stage{position:relative;aspect-ratio:1;max-width:100%;min-width:0}
+.par{position:absolute;transform:translateY(calc(var(--sy,0) * var(--k,0) * 1px))}
+.par>*{width:100%;height:100%}
+.p1{inset:6% 4% 14% 12%;--k:-.12}.p1>*{border-radius:50%;animation:drift 9s ease-in-out infinite}
+.p2{width:44%;height:44%;left:0;bottom:0;--k:-.28}.p2>*{border-radius:50%;animation:drift 7s ease-in-out infinite reverse}
+.p3{width:17%;height:25%;right:2%;top:0;--k:-.4}.p3 .flm{--a:var(--burg);animation:flick 1.8s ease-in-out infinite}
+.p4{width:13%;height:19%;left:6%;top:8%;--k:-.2}.p4 .flm{--a:var(--pink);animation:flick 2.3s ease-in-out infinite}
+.p5{width:12%;height:12%;right:6%;bottom:6%;--k:-.5;color:var(--yellow)}.p5 svg{animation:twinkle 3.5s ease-in-out infinite}
+@keyframes drift{0%,100%{transform:translate(0,0) rotate(-2deg) scale(1)}50%{transform:translate(1.5%,-3%) rotate(2.5deg) scale(1.035)}}
+
+/* photo slots */
+.ph{position:relative;overflow:hidden;background:var(--c,var(--yellow));border:4px solid var(--burg);display:grid;place-items:center;text-align:center;min-height:180px}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.ph:hover img{transform:scale(1.06)}
+.ph .cap{padding:1.2rem;display:grid;gap:.4rem;justify-items:center;color:var(--burg);max-width:26ch}
+.ph .cap b{font:700 .72rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;background:var(--burg);color:var(--yellow);padding:.4rem .55rem}
+.ph .cap span{font:700 1.05rem/1.15 var(--slab)}
+.ph .cap small{font-size:.78rem;line-height:1.3}
+.mosaic{display:grid;gap:clamp(.7rem,1.4vw,1.2rem);grid-template-columns:repeat(6,1fr);grid-auto-rows:clamp(150px,17vw,240px)}
+.mosaic .ph:nth-child(1){grid-column:span 4;grid-row:span 2}
+.mosaic .ph:nth-child(2),.mosaic .ph:nth-child(3){grid-column:span 2}
+.mosaic .ph:nth-child(4){grid-column:span 2}.mosaic .ph:nth-child(5){grid-column:span 2}.mosaic .ph:nth-child(6){grid-column:span 2}
+@media (max-width:700px){.mosaic{grid-template-columns:1fr 1fr;grid-auto-rows:170px}.mosaic .ph:nth-child(n){grid-column:span 1;grid-row:span 1}.mosaic .ph:nth-child(1){grid-column:span 2;grid-row:span 2}}
+.tall{aspect-ratio:4/5;max-width:100%}
+
+/* events */
+.events{display:grid;gap:1rem}
+.ev{display:grid;grid-template-columns:auto 1fr auto;gap:1rem 1.5rem;align-items:center;background:var(--paper);border:4px solid var(--burg);padding:1rem 1.2rem;color:var(--burg);transition:transform .2s,box-shadow .2s}
+.ev:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 var(--burg)}
+.ev .d{background:var(--pink);min-width:5.6rem;padding:.7rem .6rem;text-align:center;font:400 2.3rem/1 var(--display);font-variant-numeric:tabular-nums}
+.ev .d small{display:block;font:700 .7rem/1.2 var(--body);letter-spacing:.12em;text-transform:uppercase;margin-top:.3rem}
+.ev .w{min-width:0;display:grid;gap:.2rem}
+.ev .w span{font-weight:500}
+.tag{display:inline-block;font:700 .68rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;padding:.35rem .5rem;background:var(--mint);justify-self:start}
+.tag.warn{background:var(--yellow);border:2px dashed var(--burg)}
+.ev a{font-weight:700;white-space:nowrap}
+@media (max-width:620px){.ev{grid-template-columns:auto 1fr}.ev a{grid-column:1/-1}}
+
+/* cards + forms */
+.choice{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:1.4rem}
+.choice a{display:grid;gap:.8rem;align-content:start;padding:clamp(1.4rem,3vw,2.4rem);border:4px solid var(--burg);text-decoration:none;background:var(--c);transition:transform .2s,box-shadow .2s}
+.choice a:hover{transform:translate(-4px,-4px);box-shadow:9px 9px 0 var(--burg)}
+.choice b{font:700 .85rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px}
+form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:1.1rem 1.4rem;background:var(--paper);border:4px solid var(--burg);padding:clamp(1.1rem,3vw,2.2rem);box-shadow:10px 10px 0 var(--burg);color:var(--burg)}
+.f{display:grid;gap:.35rem;align-content:start;min-width:0}
+.f.wide,form>.wide{grid-column:1/-1}
+label{font:700 .82rem/1.2 var(--body);letter-spacing:.05em;text-transform:uppercase}
+label i{font-style:normal;font-weight:500;text-transform:none;letter-spacing:0;opacity:.8}
+input,select,textarea{font:400 1rem/1.3 var(--body);color:var(--burg-deep);background:#fff;border:2px solid var(--burg);padding:.75rem .8rem;width:100%;border-radius:0}
+textarea{min-height:6.5rem;resize:vertical}
+[aria-invalid="true"]{background:#FFE9E0;border-width:3px}
+.err{font-size:.85rem;font-weight:700;min-height:0}
+.hp{position:absolute;left:-9999px}
+.status{font-weight:700;padding:1rem;border:3px solid var(--burg);background:var(--yellow)}
+.social{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1.2rem}
+.social a{display:grid;gap:.5rem;padding:1.5rem;border:4px solid var(--burg);text-decoration:none;background:var(--c);transition:transform .2s}
+.social a:hover{transform:rotate(-1.5deg) scale(1.02)}
+dl{display:grid;gap:.9rem;margin:0}
+dt{font:700 .75rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.25rem}
+dd{margin:0;font:700 1.2rem/1.2 var(--slab);overflow-wrap:anywhere}
+
+.partners{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,190px),1fr));gap:clamp(.8rem,1.6vw,1.4rem)}
+.partners figure{margin:0;display:grid;gap:.6rem;transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.partners figure:hover{transform:rotate(-2deg) scale(1.03)}
+.partners div{aspect-ratio:1;max-width:100%;border:4px solid var(--burg);background:var(--c,#fff);display:grid;place-items:center;padding:12%}
+.partners img{width:100%;height:100%;object-fit:contain}
+.partners figcaption{font:700 1.02rem/1.15 var(--slab)}
+.trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(1rem,2.4vw,2rem);align-items:start}
+.trust figure{margin:0;display:grid;gap:.8rem}
+.trust img{display:block;width:100%;height:auto;border:4px solid var(--burg)}
+.trust figcaption{display:grid;gap:.25rem}
+.trust figcaption span{font-weight:500}
+.reels{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:1.2rem}
+.reel{position:relative;aspect-ratio:9/14;max-width:100%;overflow:hidden;border:4px solid var(--burg);text-decoration:none;display:grid;align-content:end;gap:.3rem;padding:1.2rem;isolation:isolate;color:var(--yellow)}
+.reel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .6s}
+.reel::before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(94,23,7,.92));z-index:-1}
+.reel:hover img{transform:scale(1.06)}
+.reel .play{position:absolute;top:50%;left:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:var(--orange);border:4px solid var(--burg);display:grid;place-items:center;box-shadow:5px 5px 0 var(--burg);transition:transform .25s}
+.reel:hover .play{transform:scale(1.1)}
+.reel h3{color:var(--yellow)}
+.reel .rt{font-weight:500}
+/* footer */
+.foot{background:var(--burg-deep);color:var(--yellow);padding:clamp(2.5rem,5vw,4rem) var(--gut) 2rem;display:grid;gap:2rem}
+.foot .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:2rem}
+.foot .badge{background:var(--orange);padding:1rem;display:inline-block;justify-self:start}
+.foot .badge img{display:block;width:190px;height:auto}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
+.foot h4{font:700 .75rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;margin:0 0 .9rem;color:var(--pink)}
+.foot small{border-top:2px solid rgba(245,244,190,.25);padding-top:1.2rem}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.par{transform:none}html{scroll-behavior:auto}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="m-star" viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="none" stroke="var(--a)" stroke-width="2.5"/><path class="star" d="M50 30l6 13 14 2-10 10 2 14-12-7-12 7 2-14-10-10 14-2z" fill="none" stroke="var(--a)" stroke-width="2.5" stroke-linejoin="round"/></symbol>
+  <symbol id="m-palm" viewBox="0 0 100 100"><circle cx="62" cy="64" r="20" fill="var(--b)"/><g class="palm" fill="var(--a)"><path d="M44 88c1-16 4-28 10-42l5 2c-5 13-7 25-7 40z"/><path d="M56 46Q44 30 24 40Q42 38 56 46z"/><path d="M56 46Q52 26 32 22Q48 30 56 46z"/><path d="M56 46Q62 24 80 24Q64 32 56 46z"/><path d="M56 46Q72 34 88 46Q70 40 56 46z"/><path d="M56 46Q70 48 78 64Q66 52 56 46z"/><path d="M56 46Q42 48 34 62Q46 52 56 46z"/></g><ellipse cx="48" cy="88" rx="16" ry="3" fill="var(--a)"/></symbol>
+  <symbol id="m-pot" viewBox="0 0 100 100"><path class="steam" d="M66 30q5-5 0-10t0-10" fill="none" stroke="var(--a)" stroke-width="2.5" stroke-linecap="round"/><g fill="var(--a)"><path d="M26 54h48v22a6 6 0 0 1-6 6H32a6 6 0 0 1-6-6z"/><path d="M24 50q26-13 52 0z"/><rect x="46" y="38" width="8" height="5" rx="2"/><rect x="17" y="57" width="9" height="4" rx="2"/><rect x="74" y="57" width="9" height="4" rx="2"/></g></symbol>
+  <symbol id="m-sun" viewBox="0 0 100 100"><circle cx="50" cy="48" r="27" fill="var(--a)"/><g class="lines" fill="var(--bg)"><rect x="20" y="50" width="60" height="2.6"/><rect x="20" y="56" width="60" height="2.6"/><rect x="20" y="62" width="60" height="2.6"/><rect x="20" y="68" width="60" height="2.6"/></g></symbol>
+  <symbol id="m-taco" viewBox="0 0 100 100"><g fill="var(--a)"><path d="M34 30a16 16 0 0 1 32 0z"/><path d="M34 48a16 16 0 0 1 32 0z"/><path d="M34 66a16 16 0 0 1 32 0z"/><path d="M34 84a16 16 0 0 1 32 0z"/></g></symbol>
+</svg>
+
+<div class="rail l" aria-hidden="true"><div data-tiles="36" data-off="0"></div></div>
+<div class="rail r" aria-hidden="true"><div data-tiles="36" data-off="5"></div></div>
+
+<div class="shell">
+<header class="head" id="head">
+  <a class="brand" href="#home" aria-label="Smoke & Taco home"><img src="logo.png" alt="Smoke & Taco logo" width="900" height="464"></a>
+  <button class="menu" id="menu" aria-expanded="false" aria-controls="nav">Menu</button>
+  <nav class="nav" id="nav" aria-label="Main">
+    <a href="#home">Home</a><a href="#food">Our Food</a><a href="#events">Find Us / Events</a><a href="#partners">Partners</a><a href="#book">Book Us</a><a href="#contact">Contact</a>
+    <a class="btn sm" href="#book">Book Smoke & Taco</a>
+  </nav>
+</header>
+
+<main id="main">
+<!-- HOME -->
+<section class="view" id="v-home">
+  <div class="hero">
+    <div class="stack">
+      <div class="eyebrow">L.A. style birria tacos and street food</div>
+      <h1><span>Smoked good.</span><span>Taco obsessed.</span></h1>
+      <p class="lead">Big flavours, smoked goodness and tacos worth tracking down. Find Smoke & Taco at our upcoming events or bring us to yours.</p>
+      <div class="row"><a class="btn" href="#events">Find us at an event</a><a class="btn alt" href="#book">Book us for your event</a></div>
+    </div>
+    <div class="stage">
+      <div class="par p1"><div class="ph" data-photo="hero-main" data-label="Hero taco close up" style="--c:var(--yellow)"></div></div>
+      <div class="par p2"><div class="ph" data-photo="hero-second" data-label="Second taco shot" style="--c:var(--mint)"></div></div>
+      <div class="par p3" aria-hidden="true"><div class="flm"></div></div>
+      <div class="par p4" aria-hidden="true"><div class="flm"></div></div>
+      <div class="par p5" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M50 4l12 30 32 4-24 22 7 32-27-17-27 17 7-32L6 38l32-4z" fill="currentColor"/></svg></div>
+    </div>
+  </div>
+  <div class="strip" data-tiles="30" data-off="2" aria-hidden="true"></div>
+
+  <div class="sec split">
+    <div class="stack">
+      <div class="eyebrow">Who we are</div>
+      <h2>Tacos, smoke and a lot of flavour</h2>
+      <p class="lead">Mexican and L.A. inspired birria tacos and smoked street food, served at events, festivals and pop-ups.</p>
+      <p>We travel, so the best way to try us is to check where we are cooking next. You will find us at pubs, food festivals and county shows, and we take bookings for public events and private parties too.</p>
+    </div>
+    <div class="ph tall" data-photo="intro" data-label="Serving at an event" style="--c:var(--pink)"></div>
+  </div>
+
+  <div class="sec bg-mint">
+    <div class="stack"><div class="eyebrow">Our food</div><h2>Made to be tracked down</h2></div>
+    <div class="mosaic">
+      <div class="ph" data-photo="food-1" data-label="Taco close up" style="--c:var(--yellow)"></div>
+      <div class="ph" data-photo="food-2" data-label="Smoked food" style="--c:var(--pink)"></div>
+      <div class="ph" data-photo="food-3" data-label="On the grill" style="--c:var(--orange)"></div>
+    </div>
+    <div><a class="btn" href="#food" style="--sh:var(--yellow)">Explore our food</a></div>
+  </div>
+
+  <div class="sec">
+    <div class="stack"><div class="eyebrow">Find us</div><h2>Where we are cooking next</h2></div>
+    <div class="events" data-events="home"></div>
+    <div><a class="btn" href="#events">See all upcoming events</a></div>
+  </div>
+  <div class="strip" data-tiles="30" data-off="7" aria-hidden="true"></div>
+
+  <div class="sec split bg-burg on-dark">
+    <div class="ph tall" data-photo="catering" data-label="Tacos for a crowd" style="--c:var(--orange)"></div>
+    <div class="stack">
+      <div class="eyebrow">Private catering</div>
+      <h2>Make your event a little more smokin'.</h2>
+      <p class="lead">Planning something special? Tell us what you are organising and let's explore whether Smoke & Taco is the right fit for your event.</p>
+      <div><a class="btn" href="#private">Book us for your event</a></div>
+    </div>
+  </div>
+
+  <div class="sec" id="trust">
+    <div class="stack"><div class="eyebrow">Rated and recognised</div><h2>Five star food hygiene. Award finalist.</h2>
+    <p class="lead">We hold the top Food Hygiene Rating of 5, and we are a finalist in the New Milton Advertiser & Lymington Times Food & Drink Awards 2026.</p></div>
+    <div class="trust" data-trust></div>
+  </div>
+  <div class="sec bg-mint">
+    <div class="stack"><div class="eyebrow">Watch</div><h2>See the smoke in action</h2></div>
+    <div class="social" data-reels></div>
+  </div>
+  <div class="sec bg-yellow">
+    <div class="stack"><div class="eyebrow">Latest from social</div><h2>Follow the Smoke & Taco adventure</h2>
+    <p>New dates, new specials and plenty of tacos go up on Instagram and Facebook first.</p></div>
+    <div class="social" data-social></div>
+  </div>
+
+  <div class="sec split bg-orange">
+    <div class="stack">
+      <h2>Got an event? Let's make it smokin'.</h2>
+      <div><a class="btn" href="#book">Enquire about a booking</a></div>
+    </div>
+    <div class="ph tall" data-photo="cta" data-label="Best taco photo" style="--c:var(--yellow)"></div>
+  </div>
+</section>
+
+<!-- FOOD -->
+<section class="view" id="v-food">
+  <div class="sec bg-orange">
+    <div class="stack"><div class="eyebrow">Our food</div><h1>Smoke first. Taco always.</h1>
+    <p class="lead">Tacos and smoked food, cooked fresh wherever we set up. What we serve can change from one event to the next, so check our social pages for the menu on the day.</p></div>
+  </div>
+  <div class="strip" data-tiles="30" data-off="4" aria-hidden="true"></div>
+  <div class="sec">
+    <div class="mosaic">
+      <div class="ph" data-photo="food-1" data-label="Tacos" data-sub="Loaded, colourful and built to be eaten standing up." style="--c:var(--yellow)"></div>
+      <div class="ph" data-photo="food-2" data-label="Smoked food" data-sub="Low, slow and full of smoke." style="--c:var(--pink)"></div>
+      <div class="ph" data-photo="food-3" data-label="Food preparation" data-sub="Everything put together fresh on the day." style="--c:var(--mint)"></div>
+      <div class="ph" data-photo="food-4" data-label="Close up" data-sub="The detail shot. Texture, colour, toppings." style="--c:var(--orange)"></div>
+      <div class="ph" data-photo="food-5" data-label="Behind the scenes" data-sub="The smoker, the prep and the people." style="--c:var(--mint)"></div>
+      <div class="ph" data-photo="food-6" data-label="Serving at events" data-sub="The queue, the hatch and the happy faces." style="--c:var(--pink)"></div>
+    </div>
+    <div class="split"><div class="ph tall" data-photo="food-7" data-label="Taco" style="--c:var(--yellow)"></div><div class="ph tall" data-photo="food-8" data-label="Taco" style="--c:var(--mint)"></div></div>
+    <div class="stack"><h2>Watch it being made</h2></div>
+    <div class="social" data-reels></div>
+    <div class="stack"><h2>Seen on our menu</h2>
+    <p class="lead">Slow smoked New Forest brisket. Pulled pork carnitas. Tiger prawn al pastor. Seared sea bass. Loaded birria nachos. Breakfast tacos at selected shows.</p>
+    <p class="note">These dishes come from our festival menus. The menu changes from event to event, so check our social pages for what is on that day. Ask us about allergens before you order.</p></div>
+  </div>
+  <div class="sec bg-burg on-dark"><h2>Hungry now?</h2><div><a class="btn" href="#events">Find us at an event</a></div></div>
+</section>
+
+<!-- EVENTS -->
+<section class="view" id="v-events">
+  <div class="sec bg-pink">
+    <div class="stack"><div class="eyebrow">Where to find us</div><h1>Come and find the smoke</h1>
+    <p class="lead">Every confirmed public date appears here. Dates that have passed drop off the list automatically.</p></div>
+  </div>
+  <div class="strip" data-tiles="30" data-off="9" aria-hidden="true"></div>
+  <div class="sec"><h2>Upcoming events</h2><div class="events" data-events="all"></div></div>
+  <div class="sec bg-yellow">
+    <div class="stack"><h2>From our schedule board</h2>
+    <p>These stops come from the Smoke & Taco schedule artwork. The artwork gives the day and time but not the month, so they are held here until the dates are confirmed.</p></div>
+    <div class="events" data-events="board"></div>
+  </div>
+  <div class="sec">
+    <div class="stack"><div class="eyebrow">Where we have been</div><h2>Recent stops</h2>
+    <p>A few of the events we have cooked at this year, taken from our Facebook posts.</p></div>
+    <div class="events" id="past-events"></div>
+  </div>
+  <div class="sec bg-mint">
+    <div class="stack"><div class="eyebrow">Latest from social</div><h2>Fresh dates land here first</h2></div>
+    <div class="social" data-social></div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="view" id="v-partners">
+  <div class="sec bg-mint">
+    <div class="stack"><div class="eyebrow">Event partners</div><h1>Just a few of our event partners</h1>
+    <p class="lead">Breweries, taprooms, pubs, festivals and shows we have cooked at or alongside. Thank you to every one of them for having us.</p></div>
+  </div>
+  <div class="strip" data-tiles="30" data-off="11" aria-hidden="true"></div>
+  <div class="sec"><div class="partners" id="partner-grid"></div></div>
+  <div class="sec bg-burg on-dark"><h2>Want us at your venue or event?</h2><div><a class="btn" href="#public">Become a partner</a></div></div>
+</section>
+
+<!-- BOOK -->
+<section class="view" id="v-book">
+  <div class="sec bg-orange">
+    <div class="stack"><div class="eyebrow">Book us</div><h1>Book Smoke & Taco</h1>
+    <p class="lead">Two ways to bring the tacos to you. Pick the one that fits and send us the details. We reply to every enquiry, and nothing is booked until we confirm it with you.</p></div>
+    <div class="choice">
+      <a href="#public" style="--c:var(--mint)"><h2>Public events</h2><p>Festivals, markets, pubs, breweries, community and corporate events open to the public.</p><b>Public event enquiry</b></a>
+      <a href="#private" style="--c:var(--pink)"><h2>Private catering</h2><p>Weddings, birthdays, staff parties, garden parties and other private celebrations.</p><b>Private catering enquiry</b></a>
+    </div>
+    <div class="stack"><h2>Booked with confidence</h2></div><div class="trust" data-trust></div>
+  </div>
+</section>
+
+<!-- PUBLIC -->
+<section class="view" id="v-public">
+  <div class="sec bg-mint">
+    <div class="stack"><div class="eyebrow">Public event bookings</div><h1>Let's bring tacos to your event</h1>
+    <p class="lead">Running a festival, market, pub night or community event? Tell us about it. Sending an enquiry does not confirm a booking. We will check our diary and come back to you.</p></div>
+    <form id="form-public" novalidate></form>
+    <div class="stack"><h2>Booked with confidence</h2></div><div class="trust" data-trust></div>
+  </div>
+</section>
+
+<!-- PRIVATE -->
+<section class="view" id="v-private">
+  <div class="sec split bg-pink">
+    <div class="stack"><div class="eyebrow">Private event catering</div><h1>Make your event a little more smokin'.</h1>
+    <p class="lead">Planning something special? Tell us what you are organising and let's explore whether Smoke & Taco is the right fit for your event.</p></div>
+    <div class="ph tall" data-photo="catering" data-label="Tacos for a crowd" style="--c:var(--yellow)"></div>
+  </div>
+  <div class="sec bg-pink" style="padding-top:0"><form id="form-private" novalidate></form>
+    <div class="stack"><h2>Booked with confidence</h2></div><div class="trust" data-trust></div></div>
+</section>
+
+<!-- CONTACT -->
+<section class="view" id="v-contact">
+  <div class="sec bg-yellow">
+    <div class="stack"><div class="eyebrow">Contact us</div><h1>Say hello</h1>
+    <p class="lead">Got a question, an event in mind or just want to say hello? Drop us a message and we'll get back to you.</p></div>
+    <div class="split" style="align-items:start">
+      <div class="stack">
+        <dl id="contact-list"></dl>
+        <div class="row"><a class="btn" href="#public">Public event booking</a><a class="btn alt" href="#private">Private catering</a></div>
+      </div>
+      <form id="form-contact" novalidate></form>
+    </div>
+    <div class="stack"><h2>Rated and recognised</h2></div><div class="trust" data-trust></div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="view" id="v-privacy">
+  <div class="sec">
+    <h1>Privacy and cookies</h1>
+    <div class="stack">
+      <h3>What the forms collect</h3>
+      <p>The enquiry forms ask only for the details needed to answer you: your name, how to reach you and information about your event. Those details are used to reply to your enquiry and for nothing else.</p>
+      <h3>Cookies</h3>
+      <p>This site sets no tracking or advertising cookies. If a social media feed is added later, Instagram and Facebook may set their own cookies, and a consent choice will be shown first.</p>
+      <p class="note">Draft wording. Before launch the business owner should add the legal business name, a contact for data requests and how long enquiries are kept.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="strip" data-tiles="30" data-off="1" aria-hidden="true"></div>
+<footer class="foot on-dark">
+  <div class="cols">
+    <div class="stack"><span class="badge"><img src="logo.png" alt="Smoke & Taco" width="900" height="464" loading="lazy"></span><p>Tacos and smoked street food, cooked at events and private parties.</p></div>
+    <div><h4>Explore</h4><ul><li><a href="#home">Home</a></li><li><a href="#food">Our Food</a></li><li><a href="#events">Find Us / Events</a></li><li><a href="#partners">Event Partners</a></li><li><a href="#contact">Contact</a></li></ul></div>
+    <div><h4>Book us</h4><ul><li><a href="#public">Public event bookings</a></li><li><a href="#private">Private catering</a></li></ul></div>
+    <div><h4>Follow</h4><ul id="foot-social"></ul><h4 style="margin-top:1.4rem">Legal</h4><ul><li><a href="#privacy">Privacy Policy</a></li><li><a href="#privacy">Cookie Policy</a></li></ul></div>
+  </div>
+  <small id="copy"></small>
+</footer>
+</div>
+
+<script>
+/* ============ EDITABLE CONTENT: change these values, no other code needs touching ============ */
+const SITE = {
+  email: "Smokeandtaco@outlook.com",      // business email, from the Facebook page
+  phone: "",      // business phone. Empty hides the row
+  area: "",       // base location or area covered. Empty hides the row
+  instagram: "https://www.instagram.com/smokeandtaco/",
+  facebook: "https://www.facebook.com/share/18E6oognnj/?mibextid=wwXIfr",
+  // Photos: put a file path against a slot name to replace its placeholder, e.g. "hero-main": "photos/taco-1.jpg"
+  photos: { "hero-main":"chicken", "hero-second":"cheese", "intro":"festival", "food-1":"prawn", "food-2":"nachos", "food-3":"birria", "food-4":"chicken", "food-5":"counter", "food-6":"festival", "food-7":"pineapple", "food-8":"cheese", "catering":"counter", "cta":"pineapple" },
+  // Each photo file lives in the photos folder as name.jpg. The text is read out by screen readers.
+  alts: { birria:"Taco with melted cheese and pickled red onion beside a pot of dipping broth", cheese:"Taco with grilled cheese, pickled red onion and a wedge of lime", festival:"Loaded nachos held up in front of a busy festival crowd", prawn:"Prawn taco on a blue corn tortilla with lime", nachos:"Loaded nachos with pulled meat, pickled onion and spring onion", pineapple:"Two tacos topped with grilled pineapple and pickled red onion", chicken:"Crispy chicken tacos with slaw and pickled red onion", counter:"Plates of tacos and loaded nachos lined up on a counter" },
+  // Partners: [name, logo file in the partners folder, tile background colour]
+  partners: [["Dark Revolution","darkrev.jpg","#000"],["Pig Beer","pigbeer.jpg","#000"],["Seafire Taproom","seafire.jpg","#3B5A6E"],["Conker Distillery","conker.png","#22274F"],["The Solent Cellar","solent.png","#5E1707"],["The Swan, Enford","swan.png","#fff"],["The Farmers Butcher & Farm Shop","farmers.png","#fff"],["New Forest & Hampshire County Show","newforest.jpg","#22274F"],["Highcliffe Food & Arts Festival","highcliffe.jpg","#fff"],["Christchurch Food Fest","christchurch.jpg","#fff"],["Dogstival","dogstival.jpg","#F4E6D4"],["Picnic in the Park, Lymington","picnic.jpg","#4FAE76"]],
+  // Past events shown under "Recent stops": [month, name, one line]
+  past: [["Jul","New Forest & Hampshire County Show","Three days at the Local Produce Market, with breakfast tacos in the morning and the full menu all day."],["Jul","Lymington Seafood Festival","One of our favourite events of the year. The seared sea bass went down a treat."],["Jun","The Red Lion, Milford on Sea","Serving through the Milford music festival weekend."],["Jun","Highcliffe Food and Arts Festival","On the high street all weekend."],["","Dogstival","Our first ever festival, in the New Forest."]],
+  reviews: "100% recommended on Facebook",
+  // Reels: link and a short line about each one.
+  reels: [
+    { url:"https://www.facebook.com/reel/653627457750040", title:"Loaded birria nachos", text:"A hit at the New Forest Show." },
+    { url:"https://www.facebook.com/reel/683638967796468", title:"Cheese overload", text:"Taco 'bout a cheese pull." },
+    { url:"https://www.facebook.com/reel/1395404858369340", title:"Our first festival", text:"A great weekend at Dogstival." },
+    { url:"https://www.facebook.com/reel/26085142111095151", title:"More from the hatch", text:"Another reel from our Facebook page." }
+  ],
+  // Events: date is YYYY-MM-DD. status is "published", "cancelled" or "draft". featured shows it on the homepage.
+  // An event with no date never shows as upcoming. Past dates drop off automatically.
+  events: [
+    { venue:"Dark Revolution", town:"Salisbury", date:"", day:"Thursday 16th", time:"From 5PM", status:"draft", featured:true },
+    { venue:"The White Hart", town:"Over Wallop", date:"", day:"Friday 17th", time:"5PM to 8PM", status:"draft", featured:true },
+    { venue:"The Red Lion", town:"Milford On Sea", date:"", day:"Saturday 18th and Sunday 19th", time:"From 12PM", status:"draft", featured:true }
+  ]
+};
+/* =========================================================================================== */
+
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
+
+/* tiles */
+const Y="var(--yellow)",P="var(--pink)",O="var(--orange)",M="var(--mint)",B="var(--burg)";
+const PATTERN=[[P,"star",Y],[O,"palm",Y,P],[Y,"pot",P],[M,"logo"],[B,"taco",P],[O,"flame",B],[M,"star",Y],[B,"palm",Y,P],[O,"taco",B],[P,"sun",Y],[B,"flame",P],[M,"palm",Y,P],[P,"palm",B,Y],[Y,"sun",O],[O,"flame",B],[B,"pot",P]];
+function tile(i){
+  const [bg,m,a,b]=PATTERN[i%PATTERN.length], live=i%3===0?" live":"";
+  const inner = m==="logo" ? '<img src="logo.png" alt="">' : m==="flame" ? '<div class="flm"></div>' : `<svg viewBox="0 0 100 100"><use href="#m-${m}"/></svg>`;
+  return `<div class="tile${live}" style="--bg:${bg};--a:${a||B};--b:${b||a||B}">${inner}</div>`;
+}
+$$("[data-tiles]").forEach(el=>{ const n=+el.dataset.tiles, o=+el.dataset.off; el.innerHTML=Array.from({length:n},(_,i)=>tile(i+o)).join(""); });
+
+/* photos */
+$$("[data-photo]").forEach(el=>{
+  const src=SITE.photos[el.dataset.photo], label=el.dataset.label, sub=el.dataset.sub;
+  el.innerHTML = src ? `<img src="photos/${esc(src)}.jpg" alt="${esc(SITE.alts[src]||label)}" loading="lazy">`
+    : `<div class="cap"><b>Photo slot</b><span>${esc(label)}</span><small>${esc(sub||"A real Smoke & Taco photo goes here.")}</small></div>`;
+});
+
+/* events */
+const today=new Date(); today.setHours(0,0,0,0);
+const dated=SITE.events.filter(e=>e.date && new Date(e.date+"T23:59:59")>=today && e.status!=="draft").sort((a,b)=>a.date.localeCompare(b.date));
+const board=SITE.events.filter(e=>!e.date);
+const maps=e=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(e.venue+", "+e.town);
+function evCard(e){
+  const d=e.date?new Date(e.date+"T12:00:00"):null;
+  const box=d?`<div class="d">${d.getDate()}<small>${d.toLocaleDateString("en-GB",{weekday:"short",month:"short"})}</small></div>`:`<div class="d" style="font-size:1.5rem">?<small>Month to confirm</small></div>`;
+  const tag=e.status==="cancelled"?'<span class="tag warn">Cancelled</span>':d?'<span class="tag">Confirmed</span>':'<span class="tag warn">Date to confirm</span>';
+  return `<article class="ev">${box}<div class="w">${tag}<h3>${esc(e.venue)}, ${esc(e.town)}</h3><span>${esc(d?e.time:e.day+", "+e.time)}</span></div><a href="${maps(e)}" target="_blank" rel="noopener">Get directions</a></article>`;
+}
+const empty=`<div class="stack"><p class="lead">No confirmed public dates are listed right now.</p><p>New dates go up on Instagram first. Or bring the tacos to you with a private booking.</p><div class="row"><a class="btn" href="${SITE.instagram}" target="_blank" rel="noopener">Check Instagram</a><a class="btn alt" href="#private">Book a private event</a></div></div>`;
+$$("[data-events]").forEach(el=>{
+  const k=el.dataset.events, list=k==="board"?board:k==="home"?dated.filter(e=>e.featured).slice(0,3):dated;
+  el.innerHTML=list.length?list.map(evCard).join(""):(k==="board"?"<p>Nothing waiting for a date.</p>":empty);
+});
+
+/* social + contact */
+const soc=[["Instagram","@smokeandtaco",SITE.instagram,"var(--pink)"],["Facebook","Smoke & Taco on Facebook",SITE.facebook,"var(--mint)"]];
+$$("[data-social]").forEach(el=>el.innerHTML=soc.map(s=>`<a href="${s[2]}" target="_blank" rel="noopener" style="--c:${s[3]}"><h3>${s[0]}</h3><span>${s[1]}</span><b style="font-size:.8rem;letter-spacing:.1em;text-transform:uppercase">Open ${s[0]}</b></a>`).join(""));
+$$("[data-reels]").forEach(el=>{el.className="reels";el.innerHTML=SITE.reels.map((r,i)=>`<a class="reel" href="${r.url}" target="_blank" rel="noopener" aria-label="Play ${esc(r.title)}"><img src="photos/${["nachos","cheese","festival","pineapple"][i%4]}.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#5E1707"/></svg></span><h3>${esc(r.title)}</h3><span class="rt">${esc(r.text)}</span></a>`).join("");});
+$("#partner-grid").innerHTML=SITE.partners.map(p=>`<figure><div style="--c:${p[2]}"><img src="partners/${p[1]}" alt="${esc(p[0])} logo" loading="lazy"></div><figcaption>${esc(p[0])}</figcaption></figure>`).join("");
+$$("[data-trust]").forEach(el=>el.innerHTML=`<figure><img src="badges/hygiene.jpg" alt="Food Standards Agency Food Hygiene Rating: 5, very good" loading="lazy" width="900" height="612"><figcaption><h3>Food Hygiene Rating: 5</h3><span>Very good. The top score under the Food Standards Agency scheme.</span></figcaption></figure><figure><img src="badges/finalist.jpg" alt="New Milton Advertiser and Lymington Times Food and Drink Awards 2026 finalist" loading="lazy" width="900" height="889"><figcaption><h3>Food & Drink Awards 2026 finalist</h3><span>New Milton Advertiser & Lymington Times, in partnership with Harvest Fine Foods.</span></figcaption></figure>`);
+$("#past-events").innerHTML=SITE.past.map(e=>`<article class="ev"><div class="d" style="font-size:1.5rem;background:var(--mint)">${e[0]||"&#9733;"}<small>${e[0]?"2026":"First"}</small></div><div class="w"><h3>${esc(e[1])}</h3><span>${esc(e[2])}</span></div></article>`).join("");
+$$("[data-trust]").forEach(el=>el.insertAdjacentHTML("beforeend",`<figure><a href="${SITE.facebook}" target="_blank" rel="noopener" style="display:block;aspect-ratio:900/612;max-width:100%;background:#3B5998;border:4px solid var(--burg)"><img src="badges/facebook.jpg" alt="Facebook" loading="lazy" style="width:100%;height:100%;object-fit:contain;border:0"></a><figcaption><h3>Recommended on Facebook</h3><span>${esc(SITE.reviews)}.</span></figcaption></figure>`));
+$("#foot-social").innerHTML=soc.map(s=>`<li><a href="${s[2]}" target="_blank" rel="noopener">${s[0]}</a></li>`).join("");
+$("#contact-list").innerHTML=[["Email",SITE.email||"To be added"],["Telephone",SITE.phone],["Based in",SITE.area],["Instagram",`<a href="${SITE.instagram}" target="_blank" rel="noopener">@smokeandtaco</a>`],["Facebook",`<a href="${SITE.facebook}" target="_blank" rel="noopener">Smoke & Taco</a>`]].filter(r=>r[1]).map(r=>`<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("");
+$("#copy").innerHTML='&copy; <a href="https://www.anchor-digital.co.uk" target="_blank" rel="noopener">Anchor Digital Solutions</a>. All Rights Reserved.';
+
+/* forms: [id, label, type, required, options, wide] */
+const sets=["Indoor","Outdoor","Both","Not sure yet"];
+const FORMS={
+  public:[["name","Full name","text",1],["email","Email address","email",1],["tel","Telephone number","tel",1],["org","Event or organisation name","text",1],
+    ["type","Event type","select",1,["Food festival","Music festival","Community event","Market","Pub or brewery event","Corporate event","Something else"]],["date","Event date","date",1],
+    ["start","Start time, if known","time",0],["end","Finish time, if known","time",0],["venue","Venue name","text",1],["size","Expected attendance","number",0],
+    ["addr","Venue address","textarea",1,0,1],["setting","Indoor or outdoor setting","select",1,sets],["pref","Preferred contact method","select",1,["Email","Phone"]],
+    ["fac","Catering facilities on site, such as power, water and pitch size","textarea",0,0,1],["info","Additional information","textarea",0,0,1]],
+  private:[["name","Full name","text",1],["email","Email","email",1],["tel","Telephone","tel",1],
+    ["type","Event type","select",1,["Wedding","Birthday party","Private celebration","Corporate event","Staff party","Garden party","Venue function","Something else"]],["date","Event date","date",1],
+    ["start","Start time","time",0],["end","Finish time","time",0],["guests","Estimated guest numbers","number",1],["addr","Venue and address","textarea",1,0,1],
+    ["setting","Indoor or outdoor setting","select",1,sets],["budget","Budget range","text",0],["cater","Catering requirements","textarea",0,0,1],
+    ["diet","Dietary or allergen information","textarea",0,0,1],["info","Additional details","textarea",0,0,1]],
+  contact:[["name","Name","text",1,0,1],["email","Email","email",1,0,1],["tel","Telephone","tel",0,0,1],
+    ["reason","Reason for enquiry","select",1,["General question","Public event booking","Private catering","Press or collaboration","Something else"],1],["msg","Message","textarea",1,0,1]]
+};
+Object.entries(FORMS).forEach(([key,fields])=>{
+  const form=$("#form-"+key);
+  form.innerHTML=fields.map(([id,label,type,req,opts,wide])=>{
+    const fid=key+"-"+id, at=`id="${fid}" name="${id}" ${req?"required":""} aria-describedby="${fid}-e"`;
+    const ctl=type==="select"?`<select ${at}><option value="">Choose one</option>${opts.map(o=>`<option>${o}</option>`).join("")}</select>`
+      :type==="textarea"?`<textarea ${at}></textarea>`:`<input type="${type}" ${at} ${type==="number"?'min="1" inputmode="numeric"':""} ${type==="email"?'autocomplete="email"':type==="tel"?'autocomplete="tel"':id==="name"?'autocomplete="name"':""}>`;
+    return `<div class="f${wide?" wide":""}"><label for="${fid}">${label}${req?"":" <i>(optional)</i>"}</label>${ctl}<div class="err" id="${fid}-e" role="alert"></div></div>`;
+  }).join("")+`<div class="hp" aria-hidden="true"><label for="${key}-website">Leave this empty</label><input id="${key}-website" name="website" tabindex="-1" autocomplete="off"></div>
+    <p class="wide" style="font-size:.88rem">We use these details only to reply to your enquiry. See our <a href="#privacy">privacy policy</a>.</p>
+    <div class="wide"><button class="btn" type="submit">Send enquiry</button></div><div class="status wide" id="${key}-status" role="status" hidden></div>`;
+  form.addEventListener("submit",ev=>{
+    ev.preventDefault(); let first=null;
+    fields.forEach(([id,label,type,req])=>{
+      const el=$("#"+key+"-"+id), v=el.value.trim(); let m="";
+      if(req&&!v) m="Please fill in: "+label.toLowerCase()+".";
+      else if(type==="email"&&v&&!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) m="That email address does not look right. Check for typos.";
+      else if(type==="tel"&&v&&v.replace(/\D/g,"").length<9) m="Enter a full phone number, including the area code.";
+      else if(type==="date"&&v&&new Date(v+"T23:59:59")<today) m="That date has already passed. Pick a future date.";
+      else if(type==="number"&&v&&+v<1) m="Enter a number of 1 or more.";
+      $("#"+key+"-"+id+"-e").textContent=m; el.setAttribute("aria-invalid",m?"true":"false"); if(m&&!first) first=el;
+    });
+    const st=$("#"+key+"-status");
+    if(first){ st.hidden=true; first.focus(); return; }
+    if($("#"+key+"-website").value){ return; }
+    st.hidden=false;
+    st.textContent="Your details passed every check. This preview is not connected to an inbox yet, so nothing has been sent. Once the site is live, this is where your confirmation will appear.";
+  });
+});
+
+/* routing */
+const views=["home","food","events","partners","book","public","private","contact","privacy"];
+const titles={home:"Smoke & Taco",food:"Our Food | Smoke & Taco",events:"Find Us and Upcoming Events | Smoke & Taco",partners:"Event Partners | Smoke & Taco",book:"Book Us | Smoke & Taco",public:"Public Event Bookings | Smoke & Taco",private:"Private Event Catering | Smoke & Taco",contact:"Contact Us | Smoke & Taco",privacy:"Privacy and Cookies | Smoke & Taco"};
+function route(initial){
+  const v=views.includes(location.hash.slice(1))?location.hash.slice(1):"home";
+  views.forEach(n=>$("#v-"+n).classList.toggle("on",n===v));
+  const cur=v==="public"||v==="private"?"book":v;
+  $$(".nav a:not(.btn)").forEach(a=>a.getAttribute("href")==="#"+cur?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current"));
+  document.title=titles[v]; $("#nav").classList.remove("open"); $("#menu").setAttribute("aria-expanded","false");
+  if(initial!==true) window.scrollTo(0,0);
+}
+addEventListener("hashchange",route); route(true);
+$("#menu").addEventListener("click",()=>{ const o=$("#nav").classList.toggle("open"); $("#menu").setAttribute("aria-expanded",o); });
+
+/* scroll: header shrink, parallax, rail drift */
+const still=matchMedia("(prefers-reduced-motion: reduce)").matches, rails=$$(".rail>div");
+let tick=false;
+addEventListener("scroll",()=>{ if(tick) return; tick=true; requestAnimationFrame(()=>{
+  const y=scrollY; $("#head").classList.toggle("small",y>60);
+  if(!still){ document.documentElement.style.setProperty("--sy",y);
+    const period=(rails[0].firstElementChild?.offsetHeight||80)*PATTERN.length;
+    rails.forEach((r,i)=>r.style.transform=`translateY(${-((y*(i?0.09:0.05))%period)}px)`); }
+  tick=false; }); },{passive:true});
+</script>
+
+</html>
