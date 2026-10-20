@@ -246,7 +246,7 @@ section { position: relative; }
   opacity: 0; transform: translateY(-50%) scale(.92) rotate(-2deg); transition: opacity .5s var(--ease), transform .8s var(--ease-out);
   box-shadow: 0 30px 60px -30px rgba(32, 35, 32, .45); overflow: hidden;
 }
-.svc-plate svg { width: 100%; height: 100%; }
+.svc-plate svg, .svc-plate img { width: 100%; height: 100%; object-fit: cover; }
 .svc-row:hover .svc-plate { opacity: 1; transform: translateY(-50%) scale(1) rotate(-2deg); }
 .svc-row:hover .svc-short { opacity: .25; }
 .svc-short { transition: opacity .4s; }
@@ -429,8 +429,8 @@ section { position: relative; }
 .rel-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .rel a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: center; }
 .rel-art { grid-column: 1 / -1; aspect-ratio: 4 / 3; overflow: hidden; }
-.rel-art svg { width: 100%; height: 100%; transition: transform 1.2s var(--ease-out); }
-.rel a:hover .rel-art svg { transform: scale(1.06); }
+.rel-art svg, .rel-art img { width: 100%; height: 100%; object-fit: cover; transform: none; transition: transform 1.2s var(--ease-out); }
+.rel a:hover .rel-art svg, .rel a:hover .rel-art img { transform: scale(1.06); }
 .rel-name { font-family: var(--f-display); font-size: 1.5rem; line-height: 1.15; }
 
 /* contact */
